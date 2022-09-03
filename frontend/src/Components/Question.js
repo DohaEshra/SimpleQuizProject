@@ -1,14 +1,9 @@
 import React from 'react'
-import Choices from './Choices'
-import Button from './Button'
 import Rank from './Rank'
-import { useState, useEffect } from 'react'
+import { useState} from 'react'
 import axios from 'axios'
 
 const Question = ({ questions }) => {
-    // console.log(questions)
-    // console.log(increment)
-    // const [nextBtnClick, setNextBtnClick] = useState(false);
     const [increment, setIncrement] = useState(0)
     const [question, setQuestion] = useState(questions[increment])
     const [answers, setAnswers] = useState([])
@@ -16,34 +11,28 @@ const Question = ({ questions }) => {
     const [isShown, setIsShown] = useState(false);
     const [rank, setRank] = useState(0);
     const [ranks, setRanks] = useState([]);
-    console.log(increment)
-    // console.log(increment)
+
 
     const Choices = ["adverb", "verb", "noun", "adjective"]
-    // let i = 0;
+
     // get next question
     const nextClicked = () => {
-        // console.log(increment, question.word)
-        setIncrement(incremen=>incremen+1)
+
+        setIncrement(incremen => incremen + 1)
         console.log(increment)
         if (increment < questions.length) {
             console.log(questions[increment])
             setQuestion(questions[increment])
-            // console.log(increment, question.word)
         }
         else {//get score
-            console.log("in else getscore")
+        
             getScore();
-            console.log(getScore())
             console.log("score", score)
             setIsShown(true)
-            getScore()
-            // postScore()
         }
     }
     //add his answer to answers array
     const answerClicked = (q_id, choice) => {
-        // console.log(q_id, choice)
         console.log(checkAnswer(choice));
         setAnswers(a => [...a, checkAnswer(choice)])
     }
@@ -52,7 +41,6 @@ const Question = ({ questions }) => {
     const checkAnswer = (choice) => {
         if (question.pos === choice) return true;
         else return false
-        //    () question.pos==choice ? true:false)
     }
     //get score 
     const getScore = () => {
@@ -60,18 +48,14 @@ const Question = ({ questions }) => {
         let scor = 0;
         answers.map(a => {
             if (a) {
-                // scor += 10
-            setScore(oldScore => oldScore + 10);
-            }
-            else {
-                //do nothing
+                scor += 10
+                setScore(oldScore => oldScore + 10);
             }
         })
-        postScore(score);
+        postScore(scor);
         console.log(score)
-        // postScore()
-        // return score;
     }
+    //post score to the server to get rank
     const postScore = (s) => {
         console.log(s)
         axios.post("http://localhost:8000/rank", { score: s })
@@ -81,7 +65,7 @@ const Question = ({ questions }) => {
                 setRanks(data.data.Ranks)
             }).catch(error => console.log(error))
     }
-    
+
 
     return (
 
@@ -100,7 +84,7 @@ const Question = ({ questions }) => {
                         ))}
                     </div>
                     <footer>
-                        <button className="next_btn" onClick={()=>{nextClicked()}}>Next Question</button>
+                        <button className="next_btn" onClick={() => { nextClicked() }}>Next Question</button>
                     </footer>
                 </section>
             )}

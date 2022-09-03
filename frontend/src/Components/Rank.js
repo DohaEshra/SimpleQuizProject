@@ -6,14 +6,14 @@ import { useState, useEffect } from 'react';
 import axios from 'axios'
 import Question from './Question';
 
-const Rank = ({ scor, rank, ranksArray }) => {
+const Rank = ({ scor, rank }) => {
   console.log(rank)
   const [isShown, setIsShown] = useState(false);
   const [questions, setQuestions] = useState([])
 
-  useEffect(() => {
-    // e.preventDefault()
 
+  //get questions to try again
+  useEffect(() => {
     axios.get("http://localhost:8000/practice")
       .then((data) => {
         console.log(data.data.exam)
@@ -25,13 +25,6 @@ const Rank = ({ scor, rank, ranksArray }) => {
 const tryAgain= ()=>{
   setIsShown(true);
 }
-  // const [rank, setRank] = useState(0);
-  // const postScore = ()=>{
-  //   axios.post("http://localhost:8000/rank",{score:scor})
-  //   .then(data=>{
-  //     console.log("rank",data)
-  //   }).catch(error=>console.log(error))
-  // }
   return (
     <div>
 
