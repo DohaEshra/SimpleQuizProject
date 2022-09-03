@@ -56,7 +56,7 @@ const Question = ({ questions }) => {
     }
     //get score 
     const getScore = () => {
-        // console.log("hereee", answers.length)
+
         let scor = 0;
         answers.map(a => {
             if (a) {
@@ -81,7 +81,7 @@ const Question = ({ questions }) => {
                 setRanks(data.data.Ranks)
             }).catch(error => console.log(error))
     }
-    // if(answers.length<10){
+    
 
     return (
 
@@ -98,19 +98,6 @@ const Question = ({ questions }) => {
                                 <span key={index} >{choice}</span>
                             </div>
                         ))}
-                        {/* <div className='option' >
-            <span >adverb</span>
-            </div>
-            <div className='option'  >
-            <span >verb</span>
-            </div>
-            <div className='option'  >
-            <span >noun</span>
-            </div>
-            <div className='option'  >
-            <span>adjective</span>
-            onClick={answerClicked("adjective")}
-        </div> */}
                     </div>
                     <footer>
                         <button className="next_btn" onClick={()=>{nextClicked()}}>Next Question</button>
@@ -123,9 +110,6 @@ const Question = ({ questions }) => {
         </div>
     )
 
-    // return(
-
-    //     )
 
 }
 export default Question
